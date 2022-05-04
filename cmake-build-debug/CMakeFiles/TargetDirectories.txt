@@ -1,0 +1,3 @@
+/home/sony/桌面/ Game of life/cmake-build-debug/CMakeFiles/_Game_of_life.dir
+/home/sony/桌面/ Game of life/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/sony/桌面/ Game of life/cmake-build-debug/CMakeFiles/rebuild_cache.dir

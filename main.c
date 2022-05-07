@@ -9,7 +9,7 @@ typedef struct Cell_{
     struct Cell* down;
     struct Cell* left;
     struct Cell* right;
-}Cell;
+}Cell;kll
 
 typedef struct Map_{
     int length;
@@ -19,7 +19,12 @@ typedef struct Map_{
 }Map;
 
 Map* initialize(){
-    Map* map = (Map*)malloc(sizeof(Map));
+    Map* mapheader = (Map*)malloc(sizeof(Map));
+    Map* map = (Map*)malloc(sizeof (Map));
+    mapheader->length = 0;
+    mapheader->height = 0;
+    mapheader->init_cell = NULL;
+    mapheader->next = map;
     Cell* initial_cell = (Cell*)malloc(sizeof(Cell));
     map->init_cell = initial_cell;
     initial_cell->state = NULL;
@@ -29,10 +34,13 @@ Map* initialize(){
     initial_cell->up = NULL;
     initial_cell->left = NULL;
     initial_cell->right = NULL;
+    map->length = 0;
+    map->height = 0;
+    map->next = NULL;
     return map;
 }
 
-Cell* AddCell(Cell* add_position, Cell* new_cell, int direction){
+Cell* addCell(Cell* add_position, Cell* new_cell, int direction){
     switch(direction){
         case 1:
             add_position->right = new_cell;
@@ -64,7 +72,7 @@ Cell* AddCell(Cell* add_position, Cell* new_cell, int direction){
     }
 }
 
-Map* LoadMap(FILE* file, Map* map){
+Map* loadMap(FILE* file, Map* map){
     Cell* cell_point = map->init_cell;
     Cell* line_point = map->init_cell;
     int direction = 1;
@@ -104,6 +112,64 @@ Map* LoadMap(FILE* file, Map* map){
         }
     }
     return map;
+}
+
+int* loadMapArray(FILE* file){
+
+}
+
+int* toArray(Map* map){
+    Cell* this_cell = map->init_cell;
+    int mapArray[map->height][map->length] = malloc(map->height*map->length*sizeof(int));
+    int i;
+    for(i = 0;i<map->height;i++){
+        int j;
+        for(j = 0;j<map->length;j++){
+           mapArray[i][j] = this_cell->state;
+           this_cell=this_cell->right;
+        }
+        this_cell=this_cell->down;
+    }
+    return mapArray;
+}
+
+int* copyArray(int* old_map){
+    int new_map[length(map)][length(map[0])] = malloc(length(map)*length(map[0])*sizeof(int));
+    int i;
+    for(i = 0; i<length(map); i++){
+        int j;
+        for(j = 0;j<length(map[i]);j++){
+            new_map[i][j] = old_map[i][j];
+        }
+    }
+    return new_map;
+}
+
+int* computeMap(int* map)){
+    int* map_after = copyArray(map);
+    int i;
+    int env;
+    for(i=0;i<length(map);i++){
+        int j;
+        for(j=0;j<length(map[i]);j++){
+            env = map_before[i-1][j-1]+map_before[i-1][j]+map_before[i-1][j+1]
+                  +map_before[i][j-1]+map_before[i][j+1]
+                  +map_before[i+1][j-1]+map_before[i+1][j]+map_before[i+1][j+1]
+            if(map_before[i][j]==1){
+                if(env == 2 || env == 3){
+                    map_after[i][j]=1;
+                } else {
+                    map_after[i][j]=0;
+                }
+            } else {
+                if(env == 3){
+                    map_after[i][j] = 1;
+                } else {
+                    map_after[i][j] = 0;
+                }
+            }
+        }
+    }
 }
 
 int main(int argc, char* argv[]){

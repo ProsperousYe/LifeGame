@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+#include "map.h"
 int lengthCount(FILE* file){
     //int ret[2];
     char a;
@@ -30,10 +30,11 @@ int heightCount(FILE* file){
     return count_height;
 }
 
-int loadMapArray(FILE* file,int* map){
+int loadMapArray(FILE* file,MapList* map_list){
     char a;
-    position_x = 0;
-    position_y = 0;
+    int map[map_list->height][map_list->length];
+    int position_x = 0;
+    int position_y = 0;
     while((a=fgetc(file))!=EOF){
         if(a=='0'||a=='1'){
             map[position_y][position_x] = (int)a;
@@ -45,7 +46,19 @@ int loadMapArray(FILE* file,int* map){
             return 1;
         }
     }
+    map_list->mapheader->map = map;
     return 0;
 }
 
-
+void storeMapArray(FILE* file, MapList* maplist){
+    Map* this = maplist->mapheader;
+    while(this->next!=NULL){
+        this = this->next;
+    }
+    for(int i=0;i<maplist->height;i++){
+        for(int j=0; j<maplist->length;j++){
+            fputc(this->map[i][j], file);
+        }
+        fputc('\n',file);
+    }
+}

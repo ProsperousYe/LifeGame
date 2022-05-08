@@ -4,7 +4,7 @@
 
 #ifndef MAIN_C_RUN_H
 #define MAIN_C_RUN_H
-int* copyArray(int* old_map);
+int* copyArray(MapList* mapList,int** old_map);
 
-int* computeMap(int* map, int height, int length);
+int* computeMap(MapList* maplist);
 #endif //MAIN_C_RUN_H

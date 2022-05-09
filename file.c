@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include "map.h"
 int lengthCount(FILE* file){
     //int ret[2];
@@ -46,7 +47,7 @@ int loadMapArray(FILE* file,MapList* map_list){
             return 1;
         }
     }
-    map_list->mapheader->map = map;
+    map_list->mapheader->map = (int**)map;
     return 0;
 }
 

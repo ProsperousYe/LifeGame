@@ -4,5 +4,5 @@
 
 #ifndef MAIN_C_INITIALIZE_H
 #define MAIN_C_INITIALIZE_H
-Map* initialize();
+void initialize(char* filename, MapList* map_list);
 #endif //MAIN_C_INITIALIZE_H

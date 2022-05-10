@@ -1,26 +1,29 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include "map.h"
-int lengthCount(FILE* file){
-    //int ret[2];
-    char a;
+int lengthCount(char* filename){
+    FILE* file = fopen(filename,"r");
     int count_length = 0;
-    int count = 0;
-    while((a=fgetc(file))!=EOF){
+    char a;
+    while((a = fgetc(file))!='\n'){
         count_length++;
-        if(a=='\n'&&count_length== count){
-            count = count_length;
-            count_length = 0;
-        } else if (a=='\n'&&count_length!=count){
-            printf("LoadMapError:the length of each line is not the same in the file!");
-        } else {
-            continue;
-        }
+//        count_com++;
+//        if(a=='\n'&&count_com == count){
+//            count = count_com;
+//            count_com = 0;
+//            add = 1;
+//        } else if (a=='\n'&&count_com!=count){
+//            printf("LoadMapError:the length of each line is not the same in the file!");
+//        }
     }
-    return count_length;
+    fclose(file);
+    //printf("%d", count_length);
+    return (count_length)/2;
 }
 
-int heightCount(FILE* file){
+int heightCount(char* filename){
+    FILE* file = fopen(filename,"r");
     char a;
     int count_height = 0;
     while((a=fgetc(file))!=EOF){
@@ -28,27 +31,81 @@ int heightCount(FILE* file){
             count_height++;
         }
     }
-    return count_height;
+    fclose(file);
+    return count_height+1;
 }
 
-int loadMapArray(FILE* file,MapList* map_list){
-    char a;
-    int map[map_list->height][map_list->length];
-    int position_x = 0;
-    int position_y = 0;
-    while((a=fgetc(file))!=EOF){
-        if(a=='0'||a=='1'){
-            map[position_y][position_x] = (int)a;
-            position_x++;
-        } else if(a=='\n'){
-            position_y++;
-        } else {
-            printf("LoadMapError:the file has character that neither 0 nor 1");
-            return 1;
+void loadMapArray(char* filename,MapList* map_list){
+    FILE* file = fopen(filename,"r");
+    //puts("123");
+    int **map;
+    //printf("length = %d", map_list->length);
+    //printf("height = %d", map_list->height);
+    map = (int**)malloc(map_list->height*sizeof(int));
+    //map[0] = (int*)malloc(sizeof(int)*map_list->length);
+//    int position_x = 0;
+//    int position_y = 0;
+    //printf("%c",a);
+//    char a;
+//    while((a=fgetc(file))!=EOF){
+//        //printf("%c",a);
+//        //printf("x = %d ",position_x);
+//        //printf("y = %d\n",position_y);
+//        //printf("%d, %d = %d\n", position_x, position_y, map[position_y][position_x]);
+//        for(int i =0;i<position_y-1;i++){
+//            for(int j=0;j<map_list->length;j++){
+//                printf("%d ",map[i][j]);
+//            }
+//            printf("\n");
+//        }
+//        printf("\n");
+//        if(a=='0'||a=='1'){
+//            map[position_y][position_x] = a - '0';
+//            //printf("%d, %d = %d\n", position_x, position_y, map[position_y][position_x]);
+//            position_x++;
+//        } else if(a=='\n'){
+//            //printf("\n");
+//            position_x=0;
+//            position_y++;
+//            map[position_y] = (int*)malloc(sizeof(int)*map_list->length);
+//        } else {
+//            printf("LoadMapError:the file has character that neither 0 nor 1");
+//        }
+//
+//    }
+    //printf("123");
+    char **arr;
+    arr = (char**)malloc(map_list->height*sizeof(char));
+    for(int i = 0;i<map_list->height;i++){
+        //puts("2");
+        //printf("%d: ",i);
+        arr[i] = (char*)malloc((map_list->length*2)*sizeof(char));
+        fgets(arr[i],1000000000,file);
+        char *subarr = strtok(arr[i],",");
+        map[i] = (int*)malloc(map_list->length*sizeof(int));
+        int j =0;
+        //printf("subarr = %s, arr[%d] = %s\n", subarr, i, arr[i]);
+        while(subarr!=NULL){
+            //puts("1 ");
+            //printf("%s", subarr);
+            map[i][j] = atoi(subarr);
+            //printf("%d ", map[i][j]);
+            subarr = strtok(NULL, ",");
+            //printf("%s ", subarr);
+            j++;
         }
+        //printf("\n");
     }
-    map_list->mapheader->map = (int**)map;
-    return 0;
+    //printf("123");
+//    for(int i =0;i<map_list->height;i++){
+//        for(int j=0;j<map_list->length;j++){
+//            printf("%d ",map[i][j]);
+//        }
+//        printf("\n");
+//    }
+    //printf("123");
+    fclose(file);
+    addMap(map_list, map);
 }
 
 void storeMapArray(FILE* file, MapList* maplist){

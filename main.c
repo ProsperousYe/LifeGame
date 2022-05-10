@@ -12,29 +12,34 @@ int main(int argc, char* argv[]) {
     strcat(com2, argv[3]);
     system(com1);
     system(com2);
-    FILE* file = fopen(argv[3],"r");
-    MapList* map_list = (MapList* )malloc(sizeof(MapList));
-    initialize(file, map_list);
-    //puts("123");
+    MapList* map_list = (MapList*)malloc(sizeof(MapList));
+    //printf("%ld", sizeof(MapList));
+    //
+    initialize(argv[2], map_list);
+    Map* this = map_list->mapheader;
+    while(this->next!=NULL){
+            this = this->next;
+    }
+    FILE* file = fopen(argv[3],"w");
+    for(int i = 0;i<map_list->height;i++){
+        for(int j = 0;j<map_list->length;j++){
+            fprintf(file,"%d,", this->map[i][j]);
+        }
+        fprintf(file,"\n");
+    }
+    fclose(file);
     int i;
     int num = atoi(argv[1]);
-    for(i=0;i<num;i++){
-        int** map = (int**)computeMap(map_list);
-        addMap(map_list, map);
-        //printf("%d", i);
+    for(i=0;i<num;i++) {
+        computeMap(map_list, argv[3]);
     }
-//    Map* this = map_list->mapheader;
-//    while(this->next!=NULL){
-//        this = this->next;
-//    }
-//    for(int i=0;i<map_list->height;i++){
-//        for(int j=0; j<map_list->length;j++){
-//            putc(this->map[i][j], file);
+        //printf("%d", i);
+//        Map* this = map_list->mapheader;
+//        while(this->next!=NULL){
+//            this = this->next;
 //        }
-//        putc('\n',file);
-//    }
-    FILE* storefile = fopen(argv[3],"w");
-    storeMapArray(storefile, map_list);
+    //printf("%d", i);
+    //puts("123");
     return 0;
 }
 

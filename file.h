@@ -5,11 +5,11 @@
 #include "map.h"
 #ifndef MAIN_C_FILE_H
 #define MAIN_C_FILE_H
-int lengthCount(FILE* file);
+int lengthCount(char* filename);
 
-int heightCount(FILE* file);
+int heightCount(char* filename);
 
-int* loadMapArray(FILE* file, MapList* maplist);
+int* loadMapArray(char* filename, MapList* maplist);
 
 void storeMapArray(FILE* file, MapList* maplist);
 #endif //MAIN_C_FILE_H

@@ -9,7 +9,7 @@ int lengthCount(char* filename);
 
 int heightCount(char* filename);
 
-int* loadMapArray(char* filename, MapList* maplist);
+int** loadMapArray(char* filename,MapList* map_list);
 
 void storeMapArray(FILE* file, MapList* maplist);
 #endif //MAIN_C_FILE_H

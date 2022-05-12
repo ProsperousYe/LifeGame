@@ -1,9 +1,9 @@
-#include <stdlib.h>
 #include <stdio.h>
 #include "map.h"
 #include "file.h"
 void computeMap(MapList* maplist, char* filename){
-    loadMapArray(filename, maplist);
+    //loadMapArray(filename, maplist);
+    addMap(maplist, loadMapArray(filename, maplist));
     Map* this = maplist->mapheader;
     while(this->next!=NULL){
         this = this->next;

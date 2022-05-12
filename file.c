@@ -2,23 +2,24 @@
 #include<stdlib.h>
 #include<string.h>
 #include "map.h"
+#include "file.h"
 int lengthCount(char* filename){
+    puts("123");
     FILE* file = fopen(filename,"r");
     int count_length = 0;
-    char a;
-    while((a = fgetc(file))!='\n'){
+    while(fgetc(file)!='\n'){
         count_length++;
-//        count_com++;
-//        if(a=='\n'&&count_com == count){
-//            count = count_com;
-//            count_com = 0;
-//            add = 1;
-//        } else if (a=='\n'&&count_com!=count){
-//            printf("LoadMapError:the length of each line is not the same in the file!");
-//        }
     }
     fclose(file);
-    //printf("%d", count_length);
+    printf("%d", count_length);
+    if((count_length%2)!=0){
+        printf("FileIOError:the file format is not right!\n");
+        abort();
+    }
+    if(count_length==0){
+        printf("FileIOError:it is an empty file!\n");
+        abort();
+    }
     return (count_length)/2;
 }
 
@@ -35,7 +36,7 @@ int heightCount(char* filename){
     return count_height+1;
 }
 
-void loadMapArray(char* filename,MapList* map_list){
+int** loadMapArray(char* filename,MapList* map_list){
     FILE* file = fopen(filename,"r");
     //puts("123");
     int **map;
@@ -105,18 +106,6 @@ void loadMapArray(char* filename,MapList* map_list){
 //    }
     //printf("123");
     fclose(file);
-    addMap(map_list, map);
+    return map;
 }
 
-void storeMapArray(FILE* file, MapList* maplist){
-    Map* this = maplist->mapheader;
-    while(this->next!=NULL){
-        this = this->next;
-    }
-    for(int i=0;i<maplist->height;i++){
-        for(int j=0; j<maplist->length;j++){
-            fputc(this->map[i][j], file);
-        }
-        fputc('\n',file);
-    }
-}

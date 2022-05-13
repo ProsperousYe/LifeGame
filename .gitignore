@@ -58,8 +58,6 @@ CMakeLists.txt
 
 .idea/
 
-test
-
-.txt
-
 GameofLife
+
+Test

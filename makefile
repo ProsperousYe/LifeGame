@@ -1,22 +1,17 @@
 #GameofLife:main.o file.o initialize.o map.o run.o sdl.o
 #	gcc main.o file.o initialize.o map.o run.o -o GameofLife -ISDL2_image -ISDL2
 #main.o:main.c
-#	gcc -c main.c
-#file.o:file.c
-#	gcc -c file.c
-#initialize.o:initialize.c
-#	gcc -c initialize.c
-#map.o:map.c
-#	gcc -c map.c
-#run.o:run.c
-#	gcc -c run.c
 # code details
 
-EXE_DIR = .
-EXE = $(EXE_DIR)/GameofLife
+EXE_DIR = ./src
+TEST_DIR = ./test
+EXE = ./GameofLife
+TEST = ./Test
 
-SRC= main.c file.c initialize.c map.c run.c sdl.c
+SRC1 = ./src/main.c ./src/file.c ./src/initialize.c ./src/map.c ./src/run.c ./src/sdl.c
+SRC2 = ./test/test.c ./src/file.c ./src/initialize.c ./src/map.c ./src/run.c
 
+all:$(EXE) $(TEST)
 # generic build details
 
 CC =     gcc
@@ -25,25 +20,29 @@ LIBS =   -lSDL2 -lSDL2_image
 
 # compile to  object code
 
-OBJ= $(SRC:.c=.o)
-
+OBJ1= $(SRC1:.c=.o)
+OBJ2= $(SRC2:.c=.o)
 .c.o:
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 # build executable
 
-$(EXE): $(OBJ)
-	$(CC) $(OBJ) -o $(EXE) $(LIBS)
+$(EXE): $(OBJ1)
+	$(CC) $(OBJ1) -o $(EXE) $(LIBS)
+
+$(TEST): $(OBJ2)
+	$(CC) $(OBJ2) -o $(TEST)
 
 # clean up compilation
 
 clean:
-	rm -f $(OBJ) $(EXE)
+	rm -f $(OBJ1) $(EXE)
+	rm -f $(OBJ2) $(TEST)
 
 # dependencies
 
-main.o:  main.c map.h file.h initialize.h run.h sdl.h
-file.o:  map.h
-initialize.o:  map.h file.h
-map.o: file.h
-run.o: map.h file.h
+main.o:  src/main.c src/map.h src/file.h src/initialize.h src/run.h src/sdl.h
+file.o:  src/map.h
+initialize.o:  src/map.h src/file.h
+map.o: src/file.h
+run.o: src/map.h src/file.h

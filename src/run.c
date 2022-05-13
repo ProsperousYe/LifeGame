@@ -2,7 +2,7 @@
 #include "map.h"
 #include "file.h"
 void computeMap(MapList* maplist, char* filename){
-    //loadMapArray(filename, maplist);
+    puts("123");
     addMap(maplist, loadMapArray(filename, maplist));
     Map* this = maplist->mapheader;
     while(this->next!=NULL){
@@ -70,8 +70,6 @@ void computeMap(MapList* maplist, char* filename){
         }
         fprintf(file,"\n");
         printf("\n");
-        //printf(" 0,0 = %d\n\n", map_after[0][0]);
     }
     fclose(file);
-    //return map_after;
 }

@@ -5,26 +5,6 @@
 #include "sdl.h"
 #include "file.h"
 #include "map.h"
-//SDL_Surface* showInit(void){
-//    puts("sdl");
-//    SDL_Window  *window = NULL;
-//    SDL_Surface *screenSurface = NULL;
-//    if(SDL_Init(SDL_INIT_VIDEO) < 0){
-//        fprintf(stderr,"SDL_Init; %s\n", SDL_GetError());
-//    } else {
-//        window = SDL_CreateWindow("Game of Life", SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,400,300,SDL_WINDOW_SHOWN);
-//        if(window){
-//            screenSurface = SDL_GetWindowSurface(window);
-//            SDL_FillRect(screenSurface,NULL, SDL_MapRGB(screenSurface->format,0xFF,0xFF,0xFF));
-//            SDL_UpdateWindowSurface(window);
-//            SDL_Delay(2000);
-//        }
-//    }
-//    //puts("sdl");
-//    //SDL_DestroyWindow(window);
-//    //SDL_Quit();
-//    return screenSurface;
-//}
 
 void drawGrids(MapList* maplist, char* filename,SDL_Window* window,SDL_Surface* screenSurface){
     int number;
@@ -50,7 +30,6 @@ void drawGrids(MapList* maplist, char* filename,SDL_Window* window,SDL_Surface* 
                 SDL_FillRect(screenSurface,&rect, SDL_MapRGB(screenSurface->format,0,0XFFF,0XFFF));
             }
         }
-        //printf("\n");
     }
     SDL_Delay(2000);
     SDL_UpdateWindowSurface(window);

@@ -68,3 +68,22 @@ int** loadMapArray(char* filename,MapList* map_list){
     }
 }
 
+int** readMap(char* filename,int** map, int length, int height){
+    if(filename == NULL||strlen(filename)==0){
+        printf("LoadMapError:The filename is empty\n");
+    } else {
+        FILE *file = fopen(filename, "r");//      char **arr;
+        for (int i = 0; i < height; i++) {
+            int a;
+            for (int j = 0; j < length; j++) {
+                fscanf(file,"%d", &a);
+                map[i][j] = a;
+                fgetc(file);
+            }
+            fgetc(file);
+        }
+        fclose(file);
+        return map;
+    }
+}
+

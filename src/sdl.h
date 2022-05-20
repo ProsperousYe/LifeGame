@@ -7,5 +7,6 @@
 #include "map.h"
 //void showInit(void);
 void drawGrids(MapList* maplist, char* filename,SDL_Window* window, SDL_Surface* screenSurface);
-void closeWindow(SDL_Window* window, SDL_Surface* surface);
+void chooseGrids(SDL_Surface* surface, SDL_Window* window, int length, int height, int** map);
+void drawMap(int** map, int length, int height, SDL_Window* window,SDL_Surface* screenSurface);
 #endif //MAIN_C_SDL_H

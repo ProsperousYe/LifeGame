@@ -21,5 +21,7 @@ And if the test can exit normally, that means all the tests passed
 There are two running method:  
 `  
 $ ./GameofLife 4 game.txt history.txt  //The game will using the initial map stored in the ./data/game.txt and record the history in the ./data/history. The game will run 4 steps  
+`  
+`  
 $ ./GameofLife 4 game.txt history.txt -i //The game will running in custom mode, the initial map will be decided by cilcking and user can change the cells on each step and the total step number is free custom    
 `  

@@ -12,14 +12,14 @@ The test suite is in the *test* repository
 The code is in the *test* repository  
 The test cases are in the *test/test* repository  
 Run the command below to test the basic functions:  
-`
+`  
 $ ./test  
-`
-If there is any error, the test program will abort and show the relative messages
-And if the test can exit normally, that means all the tests passed
-3. Running
-There are two running method:
-`
+`  
+If there is any error, the test program will abort and show the relative messages  
+And if the test can exit normally, that means all the tests passed  
+3. Running  
+There are two running method:  
+`  
 $ ./GameofLife 4 game.txt history.txt  //The game will using the initial map stored in the ./data/game.txt and record the history in the ./data/history. The game will run 4 steps  
-$ ./GameofLife 4 game.txt history.txt -i //The game will running in custom mode, the initial map will be decided by cilcking and user can change the cells on each step and the total step number is free custom  
-`
+$ ./GameofLife 4 game.txt history.txt -i //The game will running in custom mode, the initial map will be decided by cilcking and user can change the cells on each step and the total step number is free custom    
+`  

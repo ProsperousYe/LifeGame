@@ -25,6 +25,7 @@ There are two running method:
 $ ./GameofLife 4 game.txt history.txt  //The game will using the initial map stored in the ./data/game.txt and record the history in the ./data/history. The game will run 4 steps  
 `  
 (1) Run the program and the window will be reated:  
+![image](https://user-images.githubusercontent.com/93996508/169670894-0b113926-1082-4c13-8d2f-2b8450614d4a.png)  
 (2) Then the map of each step will be shown automatically： 
 ![image](https://user-images.githubusercontent.com/93996508/169670839-bf8f491b-66f7-4d9d-b7f0-d74a4cb44e73.png)  
 After 2 seconds:  

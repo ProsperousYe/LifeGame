@@ -26,7 +26,7 @@ $ ./GameofLife 4 game.txt history.txt  //The game will using the initial map sto
 `  
 (1) Run the program and the window will be created:  
 ![image](https://user-images.githubusercontent.com/93996508/169670894-0b113926-1082-4c13-8d2f-2b8450614d4a.png)  
-(2) Then the map of each step will be shown automatically： 
+(2) Then the map of each step will be shown automatically:  
 ![image](https://user-images.githubusercontent.com/93996508/169670839-bf8f491b-66f7-4d9d-b7f0-d74a4cb44e73.png)  
 After 2 seconds:  
 ![image](https://user-images.githubusercontent.com/93996508/169670843-1c3b36ec-fc3a-4740-af60-e4d9a42e20e5.png)  

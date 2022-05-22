@@ -53,7 +53,7 @@ void start(int argc, char* argv[]){
     int i;
     int num = strtol(argv[1],argv,10);
 
-    for(i=0;i<num;i++) {
+    for(i=0;i<num+1;i++) {
         puts("running...");
         printf("\nthe %d\n",i);
         addMap(map_list, loadMapArray(storefile, map_list));
@@ -93,8 +93,10 @@ void start(int argc, char* argv[]){
 
 int main(int argc, char* argv[]) {
     if(argc == 4){
+        //Run the file definition mode
         start(argc, argv);
     } else if(argc == 5 && strcmp("-i",argv[4]) == 0){
+        //Run the customs mode
         char storefile[50] = "./data/";
         strcat(storefile, argv[3]);
         int length;
@@ -131,6 +133,8 @@ int main(int argc, char* argv[]) {
         mapheader->next = new;
         new->map = initmap;
         new->next  = NULL;
+        Map* p = map_list->mapheader;
+        Map* q = NULL;
         //create the SDL window and surface
         if(SDL_Init(SDL_INIT_VIDEO) < 0){
             fprintf(stderr,"SDL_Init; %s\n", SDL_GetError());
@@ -160,6 +164,16 @@ int main(int argc, char* argv[]) {
             SDL_WaitEvent(&event);
             switch (event.type) {
                 case SDL_QUIT:
+                    while(p->next!=NULL){
+                        //free(p->map);
+                        //p->map = NULL;
+                        q = p->next;
+                        //free(p->map);
+                        free(p);
+                        p = q;
+                    }
+                    free(map_list);
+                    map_list = NULL;
                     SDL_DestroyWindow(window);
                     SDL_Quit();
                 case SDL_MOUSEBUTTONUP:
@@ -182,21 +196,10 @@ int main(int argc, char* argv[]) {
                 default:
                     break;
             }
-
-//            if(event.type != SDL_QUIT){
-//                computeGrids(initmap, storefile,length, height);
-//                initmap = readMap(storefile, initmap, length, height);
-//                drawMap(initmap, length, height, window, surface);
-//                SDL_UpdateWindowSurface(window);
-//                sleep(2);
-//            } else {
-//                break;
-//            }
         }
-        END:
-        SDL_DestroyWindow(window);
-        SDL_Quit();
+
     }
+
     return 0;
 }
 

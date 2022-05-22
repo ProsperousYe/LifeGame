@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 void addMap(MapList* map_list, int** map){
-
+    //add a map node to the maplist
     if(map==NULL||map_list==NULL){
         printf("AddMapError:the map list pointer or map pointer is NULL\n");
     } else {

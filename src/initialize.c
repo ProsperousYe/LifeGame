@@ -3,6 +3,7 @@
 #include"file.h"
 #include"map.h"
 void initialize(char* filename, MapList* map_list){
+    //Initialize the program
     if(map_list == NULL){
         printf("InitError:The map list pointer is NULL\n");
         return;

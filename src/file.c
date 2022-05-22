@@ -4,6 +4,7 @@
 #include "map.h"
 #include "file.h"
 int lengthCount(char* filename){
+    //count the file length
     puts("123");
     FILE* file = fopen(filename,"r");
     int count_length = 0;
@@ -24,6 +25,7 @@ int lengthCount(char* filename){
 }
 
 int heightCount(char* filename){
+    //count the file height
     FILE* file = fopen(filename,"r");
     char a;
     int count_height = 0;
@@ -41,6 +43,7 @@ int heightCount(char* filename){
 }
 
 int** loadMapArray(char* filename,MapList* map_list){
+    //load the map into a two division array
     if(map_list == NULL){
         printf("LoadMapError:The map list pointer is NULL\n");
     } else if(filename == NULL||strlen(filename)==0){
@@ -69,6 +72,7 @@ int** loadMapArray(char* filename,MapList* map_list){
 }
 
 int** readMap(char* filename,int** map, int length, int height){
+    //read the map is the height and length is known
     if(filename == NULL||strlen(filename)==0){
         printf("LoadMapError:The filename is empty\n");
     } else {

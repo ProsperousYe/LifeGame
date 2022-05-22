@@ -1,5 +1,5 @@
 //
-// Created by sony on 22-5-11.
+// Created by sony on 22-5-11. SDL module
 //
 #include <SDL2/SDL.h>
 #include "sdl.h"
